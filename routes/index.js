@@ -2,10 +2,10 @@ const express = require('express');
 // J'importe ici tous les fichiers "route" contenus dans le 
 // dossier "routes"
 
-// const userRoute = require('./user.route');
+const userRoute = require('./user.route');
 const articleRoute = require('./article.route');
-// const signUpRoute = require('./signup.route');
-// const loginRoute = require('./login.route');
+const signUpRoute = require('./signup.route');
+const loginRoute = require('./login.route');
 //const childRoute = require('./child.route');
 //const categorieRoute = require('./categorie.route');
 
@@ -17,11 +17,10 @@ const router = express.Router();
 // Ici, les routes contenues dans le fichier user.route.js pointeront vers /users
 // "http://localhost/api/users"
 
-// router.use('/users', userRoute);
-
+router.use('/users', userRoute);
 router.use('/articles', articleRoute);
-// router.use('/login', loginRoute);
-// router.use('/signup', signUpRoute);
+router.use('/login', loginRoute);
+router.use('/signup', signUpRoute);
 // router.use('/children', childRoute);
 // router.use('/categories', categorieRoute);
 
