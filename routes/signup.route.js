@@ -13,7 +13,7 @@ router.route('/')
         const user = await userController.getByEmail(req.body);
 
         if (user) {
-            res.status(400).json({message: "L'email est déjà utilisé"});
+            res.status(400).json({message: "L'email est déjà utilisé !"});
         } else {
             const newUser = await userController.add(req.body);
             // const token = jwt.sign({
@@ -24,7 +24,7 @@ router.route('/')
 
             
     
-            res.status(201).json(newUser);
+            res.status(201).json({message: "L'utilisateur a bien été ajouté !"});
         }
     })
 ;

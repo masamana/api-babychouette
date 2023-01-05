@@ -26,12 +26,13 @@ const isAuth = () => {
 
 const isAdmin = () => {
     return (req, res, next) => {
+        console.log(req.headers.authorization)
         const header = req.headers.authorization;
         
         if (!header) {
             res.status(401).json({message: "Vous devez être connecté"});
         }
-
+        
         const access_token = header.split(" ")[1];
 
 

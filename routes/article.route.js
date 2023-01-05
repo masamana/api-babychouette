@@ -3,6 +3,7 @@ const express = require('express');
 const articleController = require('../controllers/article.controller');
 const articleSchema = require('../models/article');
 const validator = require('../utils/validator');
+const auth = require('../utils/auth');
 
 
 
@@ -18,7 +19,7 @@ router.route('/')
         res.status(200).json(articles)
     })
 
-    .post(validator(articleSchema), async (req, res) => {
+    .post(validator(articleSchema), auth.isAdmin(), async (req, res) => {
         const new_article = await articleController.add(req.body);
 
         if (!new_article) {
@@ -62,7 +63,7 @@ router.route('/:id')
     // })
     // en rajoutant un PUT en réutilisant ma fonction update, l'app plante, à modifier et chercher pourquoi
 
-    .patch(async (req, res) => {
+    .patch(auth.isAdmin(), async (req, res) => {
         const article = await articleController.update(req.params.id, req.body);
         
         if (!article) {
@@ -70,9 +71,10 @@ router.route('/:id')
         }
         res.status(202).json(article);
     })
+    // j'ajoute le middleware pour empêcher l'accès aux non admin 
     //ici je fait un patch car je veux laisser le choix de modifier partiellement l'article, je retire le schemaValidator de mon article 
 
-    .delete(async (req, res) => {
+    .delete(auth.isAdmin(), async (req, res) => {
         const article = await articleController.remove(req.params.id);
         
         if (!article) {
