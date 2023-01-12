@@ -1,7 +1,7 @@
 {
   "name": "api-babychouette",
   "version": "1.0.0",
-  "description": "��#\u0000 \u0000a\u0000p\u0000i\u0000-\u0000b\u0000a\u0000b\u0000y\u0000c\u0000h\u0000o\u0000u\u0000e\u0000t\u0000t\u0000e\u0000\r\u0000 \u0000",
+  "description": "api-babychouette",
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js"

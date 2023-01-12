@@ -2,9 +2,9 @@ const express = require('express');
 // J'appelle un fichier nommé "user.controller".
 // Il sert à séparer la logique :
 // Le fichier "route" sert à lister les méthodes HTTP disponibles
-// Le fichier "controller" contient la logique des données (les appels MySQL ici par exemple)
+// Le fichier "controller" contient les requêtes pour le CRUD des données
 const userController = require('../controllers/user.controller');
-const auth = require('../utils/auth')
+const auth = require('../utils/auth');
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ const router = express.Router();
 // GET et PUT sur '/' (soit "http://localhost/api/users/")
 router.route('/')
     .get(auth.isAdmin(), async (req, res) => {
-        // On fait appel à des fonctions que je créé dans le controller.
+        // On fait appel aux fonctions créées dans le controller.
         const users = await userController.getAll();
         // Si je ne reçois rien, je répond une 404.
         if (!users) {
@@ -45,7 +45,7 @@ router.route('/admin')
 
 // et GET, PATCH et DELETE sur '/:id' (soit "http://localhost/api/users/:id")
 router.route('/:id')
-    .get(auth.isAdmin(), async (req, res) => {
+    .get(auth.isAuth(), async (req, res) => {
         const user = await userController.getById(req.params.id);
         if (!user) {
             res.status(404).json("L'utilisateur n'existe pas.");
@@ -59,7 +59,7 @@ router.route('/:id')
         }
         res.status(202).json(user);
     })
-    .delete(auth.isAdmin(), async (req, res) => {
+    .delete(auth.isAuth(), async (req, res) => {
         const user = await userController.remove(req.params.id);
         if (!user) {
             res.status(404).json("L'utilisateur n'existe pas.");

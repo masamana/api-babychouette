@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 
-// On appelle un fichier créé qui tient le connexion MySQL.
+// J'appelle un fichier créé qui tient le connexion MySQL.
 const db = require('../utils/db');
 
 // Je créé des fonctions async qui appelle la base de données, et renvoie les données.

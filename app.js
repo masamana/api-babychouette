@@ -1,4 +1,4 @@
-// j'appelle les packs npm
+// j'appelle les paquets npm
 
 const express = require('express');
 const cors = require('cors');
@@ -22,16 +22,15 @@ app.use(cors());
 // (https://developer.mozilla.org/fr/docs/Glossary/CORS)
 
 app.use(express.json());
-// JSON du pack express pour permettre à express de parser le json envoyé de le corps des request
+// JSON du pack express pour permettre à Express de parser le json envoyé de le corps des requêtes
 
 // j'applique mon router (situé dans routes/index.js) sur l'adresse
-// "/api". Toutes nos routes seront donc de la forme : 
-// "http://localhost/api/{entité}" etc. --> restfull
+// "/api". Toutes mes routes seront donc de la forme : 
+// "http://localhost/api/{entité}" etc ... --> restfull
 app.use(config.basePath, routes);
 
-
-// Je dis à mon serveur Express d'écouter le port 8080 pour fonctionner
-// (port par défaut de HTTP).
+// Je demande à mon serveur Express d'écouter le port 8080 pour fonctionner
+// (port HTTP par défaut).
 app.listen(config.port, () => {
     console.log("Server up on port " + config.port);
 });
